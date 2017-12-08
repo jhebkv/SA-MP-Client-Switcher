@@ -1,6 +1,7 @@
 # SAMP Client Switcher (Launcher)
-SA:MP Client Switcher (samp_cs)
-Version: 1.0.1.1
+- Title: SA:MP Client Switcher (samp_cs)
+- Description: Easy switch / Auto change SAMP client to different version.
+- Version: 1.0.1.1
 
 ---------------------------------------------
 Content:
