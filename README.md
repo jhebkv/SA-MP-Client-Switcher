@@ -1,20 +1,21 @@
 # SAMP Client Switcher (Launcher)
 SA:MP Client Switcher (samp_cs)
 Version: 1.0.1.1
+
 ---------------------------------------------
 Content:
- | SAMP 0.3.7-R2
- | SAMP 0.3.8-RC4
- | ASI Loader
+ SAMP 0.3.7-R2
+ SAMP 0.3.8-RC4
+ ASI Loader
 
 Credits:
- | SAMP Launcher (jheb)
- | SA-MP (samp.com)
- | ServerList API (monitor.sacnr.com)
- | ASI loader (silent/zdanio95)
- | AHK (autohotkey.com)
+ SAMP Launcher (jheb)
+ SA-MP (samp.com)
+ ServerList API (monitor.sacnr.com)
+ ASI loader (silent/zdanio95)
+ AHK (autohotkey.com)
+ 
 ---------------------------------------------
-
 What is this about ?
 This is tools/program to switch your samp client to other version without un/install or reinstall to match the server, created using AHK.
 
@@ -30,4 +31,5 @@ SAMP 0.3.7-R2, 0.3.8-RC4
 ASI Loader
 SAMP Client Switcher.
 
+---------------------------------------------
 https://forum.ls-rp.com/viewtopic.php?f=222&t=650894
