@@ -1,6 +1,5 @@
 #NoEnv
 #SingleInstance Force
-#Include json.ahk
 #Notrayicon
 SetWorkingDir %A_ScriptDir%
 if not (A_IsAdmin or RegExMatch(full_command_line," /restart(?!\S)")){
@@ -13,7 +12,7 @@ if not (A_IsAdmin or RegExMatch(full_command_line," /restart(?!\S)")){
 	}
 	ExitApp
 }
-pvers:="1.0.1.1"
+pvers:="1.0.1.1-b"
 pname:="SAMP Launcher"
 psnme:="SAMPL"
 cnfig:="Settings.ini"
@@ -54,7 +53,6 @@ gosub,iread
 gosub,ichck
 gosub,gload
 gosub,gchck
-sleep 2000
 return
 iread:
 iniread,gtexe,%cnfig%,main,gtexe
@@ -98,7 +96,7 @@ menu,svrmenu,disable,Change Server Version
 menu,svrmenu,add,Remove Server,smn3
 menu,svrmenu,disable,Remove Server
 menu,optmenu,add,Client Settings,omn1
-menu,optmenu,add,Option,omn2
+menu,optmenu,add,Launcher Settings,omn2
 menu,hlpmenu,add,Help,hmn1
 menu,hlpmenu,add,About,hmn2
 menu,menum,add,File, :flemenu
@@ -180,20 +178,24 @@ if (gui=2)
 return
 smn11:
 gui,submit
-if (!ec(asvn) || !ec(aspr)){
-	gui,-alwaysontop
-	Msgbox,,Error 101 [Server Add],Invalid Input [HostName : Port].`nHostname : %asvn%, Port : %aspr%.
-	gui,+alwaysontop
-	return
+if !ec(op){
+	op:=1
+	if (!ec(asvn) || !ec(aspr)){
+		gui,-alwaysontop
+		Msgbox,,Error 101 [Server Add],Invalid Input [HostName : Port].`nHostname : %asvn%, Port : %aspr%.
+		gui,+alwaysontop
+		op:=0
+		return
+	}
+	if (sv_chk(asvn,"sip")=asvn){
+		aspr:=sv_chk(asvn,"spr")
+		asip:=sv_chk(asvn,"sip")
+		gosub,smn11_n2
+		return
+	}
+	else
+		gosub,smn11_n1
 }
-if (sv_chk(asvn,"sip")=asvn){
-	aspr:=sv_chk(asvn,"spr")
-	asip:=sv_chk(asvn,"sip")
-	gosub,smn11_n2
-	return
-}
-else
-	gosub,smn11_n1
 return
 smn11_n1:
 st("Checking Server IP by ping",asvn)
@@ -227,6 +229,7 @@ if !ec(sv_inf(asip,aspr)){
 		gosub,smn11_n3
 		return
 	}
+	op:=0
 	return
 }
 else
@@ -330,67 +333,86 @@ if (gui=3)
 return
 omn10:
 gui,submit,nohide
-a:=br_cli()
+if !ec(op){
+	op:=1
+	a:=br_cli()
+	op:=0
+}
 return
 omn11:
 gui,submit
-if !ec(omn1){
-	msgbox,,Error 201 [Add Client],Please fill the empty box with selected Client Version.`n| e.g. [0.3.8-RZ9]
-	gui,show
-	return
-}
-ifexist,%srdir_smp%\%omn1%\samp.dll
-{
-	Msgbox,52,Warning,Current version of samp is already exist in your list [%omn1%].`nWould you like to overwrite them ?
-	ifmsgbox no
-	{
+if !ec(op){
+	op:=1
+	if !ec(omn1){
+		msgbox,,Error 201 [Add Client],Please fill the empty box with selected Client Version.`n| e.g. [0.3.8-RZ9]
 		gui,show
+		op:=0
 		return
 	}
+	ifexist,%srdir_smp%\%omn1%\samp.dll
+	{
+		Msgbox,52,Warning,Current version of samp is already exist in your list [%omn1%].`nWould you like to overwrite them ?
+		ifmsgbox no
+		{
+			gui,show
+			op:=0
+			return
+		}
+	}
+	di(srdir_smp "\" omn1)
+	splitpath,a,b,c
+	cc_ins(omn12,c,omn1)
+	if (b="samp"){
+		filecopy,%a%.exe,%srdir_smp%\%omn1%\samp.exe,1
+		filecopy,%a%.dll,%srdir_smp%\%omn1%\samp.dll,1
+	}
+	else {
+		filecopy,%c%\samp.exe,%srdir_smp%\%omn1%\samp.exe,1
+		filecopy,%c%\samp.dll,%srdir_smp%\%omn1%\samp.dll,1
+	}
+	cc(omn1)
+	cc_cpy(omn1)
+	guicontrol,,omn1,`n
+	guicontrol,,omn12,`n
+	guicontrol,disable,omn11
+	guicontrol,disable,omn1
+	msgbox,,%pname% - Client Added [%omn1%],SAMP v[%omn1%] added to client list.`nClient directory: %srdir_smp%\%omn1%`nPlease rename to correct version if you think wrongly type the version.
+	gosub,3guiclose
+	guicontrol,,ccli,%omn1%
+	guicontrol,choose,ccli,%omn1%
 }
-di(srdir_smp "\" omn1)
-splitpath,a,b,c
-cc_ins(omn12,c,omn1)
-if (b="samp"){
-	filecopy,%a%.exe,%srdir_smp%\%omn1%\samp.exe,1
-	filecopy,%a%.dll,%srdir_smp%\%omn1%\samp.dll,1
-}
-else {
-	filecopy,%c%\samp.exe,%srdir_smp%\%omn1%\samp.exe,1
-	filecopy,%c%\samp.dll,%srdir_smp%\%omn1%\samp.dll,1
-}
-cc(omn1)
-cc_cpy(omn1)
-guicontrol,,omn1,`n
-guicontrol,,omn12,`n
-guicontrol,disable,omn11
-guicontrol,disable,omn1
-msgbox,,%pname% - Client Added [%omn1%],SAMP v[%omn1%] added to client list.`nClient directory: %srdir_smp%\%omn1%`nPlease rename to correct version if you think wrongly type the version.
-gosub,3guiclose
-guicontrol,,ccli,%omn1%
-guicontrol,choose,ccli,%omn1%
 return
 omn12:
 gui,submit,nohide
-iniread,a,%cnfig%,main,crcli
-if (a=ccli){
-	a:=
-	if (gui=3)
-		gosub,3guiclose
-	return
-}
-if !ec(ccli){
-	st("SA-MP Client not found on your list, Please add one","N/A")
-	settimer,rtips,1000
-	return
-}
-st("Changing SA-MP Client",ccli)
-ifexist %srdir_smp%\%ccli%
-	if cc_cpy(ccli,0)
+if !ec(op){
+	op:=1
+	iniread,a,%cnfig%,main,crcli
+	if (a=ccli){
+		a:=
 		if (gui=3)
 			gosub,3guiclose
-guicontrol,choose,ccli,%ccli%
-settimer,rtips,500
+		op:=0
+		return
+	}
+	if !pr_kil("samp.exe|gta_sa.exe"){
+		op:=0
+		return
+	}
+	if !ec(ccli){
+		st("SA-MP Client not found on your list, Please add one","N/A")
+		settimer,rtips,1000
+		op:=0
+		return
+	}
+	st("Changing SA-MP Client",ccli)
+	ifexist %srdir_smp%\%ccli%
+		if cc_cpy(ccli,0)
+			if (gui=3)
+				gosub,3guiclose
+	guicontrol,choose,ccli,%ccli%
+	settimer,rtips,500
+	op:=0
+}
 return
 omn13:
 gui,submit,nohide
@@ -419,25 +441,29 @@ if (gui=5)
 return
 omn21:
 gui,submit,nohide
-gui,-alwaysontop
-fileselectfolder,gtdirc,*%gtdir%,0
-ifexist,%gtdirc%\gta_sa.exe
-{
-	gtdir:=gtdirc
-	gtexe:=gtdir "\gta_sa.exe"
-	iniwrite,%gtdir%,%cnfig%,main,gtdir
-	iniwrite,%gtexe%,%cnfig%,main,gtexe
-	regwrite,reg_sz,hkcu,%smreg%,gta_sa_exe,%gtexe%
-	guicontrol,,gtdir,%gtdir%
-	ifexist,%gtdir%\samp.exe
+if !ec(op){
+	op:=1
+	gui,-alwaysontop
+	fileselectfolder,gtdirc,*%gtdir%,0
+	ifexist,%gtdirc%\gta_sa.exe
 	{
-		sampexe:=gtdir "\samp.exe"
-		iniwrite,%sampexe%,%cnfig%,main,sampexe
+		gtdir:=gtdirc
+		gtexe:=gtdir "\gta_sa.exe"
+		iniwrite,%gtdir%,%cnfig%,main,gtdir
+		iniwrite,%gtexe%,%cnfig%,main,gtexe
+		regwrite,reg_sz,hkcu,%smreg%,gta_sa_exe,%gtexe%
+		guicontrol,,gtdir,%gtdir%
+		ifexist,%gtdir%\samp.exe
+		{
+			sampexe:=gtdir "\samp.exe"
+			iniwrite,%sampexe%,%cnfig%,main,sampexe
+		}
 	}
+	guicontrol,disable,omn21
+	guicontrol,,omn21,Done.
+	gui,+alwaysontop
+	op:=0
 }
-guicontrol,disable,omn21
-guicontrol,,omn21,Done.
-gui,+alwaysontop
 return
 omn22:
 gui,submit,nohide
@@ -445,66 +471,58 @@ iniwrite,%rexit%,%cnfig%,main,rexit
 return
 omn23:
 gui,submit,nohide
-gui,-alwaysontop
-ow:=1
-loop,%bcdir%\*
-	a:=a_index
-if ec(a){
-	msgbox,52,Warning 505 [Backup],You are about to backup GTA files...`n | Backup directory : %bcdir%`nWould you like to overwrite backed files (if any) ?
-	ifmsgbox Yes
-	{
-		a:=
-		loop,%gtdir%\* {
-			fb(a_loopfilename,1)
-			sleep,100
+if !ec(op){
+	op:=1
+	gui,-alwaysontop
+	loop,%bcdir%\*
+		a:=a_index
+	if ec(a){
+		msgbox,52,Warning 505 [Backup],You are about to backup GTA files...`n | Backup directory : %bcdir%`nWould you like to overwrite backed files (if any) ?
+		ifmsgbox Yes
+		{
+			a:=
+			loop,%gtdir%\*
+				fb(a_loopfilename,1)
+			loop,%gtdir%\cleo\*
+				fb("cleo\" a_loopfilename,1)
+			loop,%gtdir%\samp\*
+				fb("samp\" a_loopfilename,1)
+			loop,%gtdir%\scripts\*
+				fb("scripts\" a_loopfilename,1)
+			gosub,omn231
+			return
 		}
-		loop,%gtdir%\cleo\* {
-			fb("cleo\" a_loopfilename,1)
-			sleep,100
-		}
-		loop,%gtdir%\samp\* {
-			fb("samp\" a_loopfilename,1)
-			sleep,100
-		}
-		loop,%gtdir%\scripts\* {
-			fb("scripts\" a_loopfilename,1)
-			sleep,100
-		}
-		gosub,omn231
-		return
 	}
+	loop,%gtdir%\*
+		fb(a_loopfilename)
+	loop,%gtdir%\cleo\*
+		fb("cleo\" a_loopfilename)
+	loop,%gtdir%\samp\*
+		fb("samp\" a_loopfilename)
+	loop,%gtdir%\scripts\*
+		fb("scripts\" a_loopfilename)
 }
-loop,%gtdir%\* {
-	fb(a_loopfilename)
-	sleep,100
-}
-loop,%gtdir%\cleo\* {
-	fb("cleo\" a_loopfilename)
-	sleep,100
-}
-loop,%gtdir%\samp\* {
-	fb("samp\" a_loopfilename)
-	sleep,100
-}
-loop,%gtdir%\scripts\* {
-	fb("scripts\" a_loopfilename)
-	sleep,100
-}
+gosub,omn231
+return
 omn231:
 guicontrol,disable,omn23
 guicontrol,,omn23,Backed up.
 if (gui=5)
 	gui,+alwaysontop
-ow:=0
+op:=0
 return
 omn24:
-fr()
-fr("samp")
-fr("cleo")
-fr("scripts")
-guicontrol,disable,omn24
-guicontrol,,omn24,Restored.
-st("Restoring GTA SA files","Success")
+if !ec(op){
+	op:=1
+	fr()
+	fr("samp")
+	fr("cleo")
+	fr("scripts")
+	guicontrol,disable,omn24
+	guicontrol,,omn24,Restored.
+	st("Restoring GTA SA files","Success")
+	op:=0
+}
 return
 plynw:
 gui,submit,nohide
@@ -546,6 +564,10 @@ if !ec(ser)||(ser="N/A"){
 		gosub,smn2
 	return
 }
+if pr_chk("samp.exe")||pr_chk("gta_sa.exe"){
+	pr_kil("samp.exe|gta_sa.exe")
+	return
+}
 st("Checking asi files")
 if as()=1 {
 	st("Checking Client list")
@@ -575,12 +597,6 @@ if as()=1 {
 	a:=
 	b:=
 	c:=
-}
-if pr_chk("gta_sa.exe"){
-	msgbox,52,Error 203 [gta_sa.exe],GTA San Andreas is currently running.`nTerminate gta_sa.exe ?
-	ifmsgbox yes
-		pr_kil("gta_sa.exe")
-	return
 }
 run,%gtexe% -c -n %usrnm% -h %sip% -p %spr%,%gtdir%
 st("GTA San Andreas is currently running")
@@ -651,6 +667,7 @@ return
 4guiclose:
 5guiclose:
 ow:=0
+op:=0
 settimer,rtips,500
 if (gui!=1)
 	gui,destroy
@@ -832,23 +849,10 @@ sv_inf(a,b){
 	return 1
 }
 sv_cip(a){
-	run,%comspec% /c ping.exe %a% -n 1 `> "server.txt",,hide,d
-	while pr_chk(d)
-		sleep 100
-	fileread,x,server.txt
-	filedelete,server.txt
-	loop,parse,x,`n
-	{
-		z:=a_loopfield
-		if z contains Ping statistics for
-		{
-			stringsplit,z,z,%a_space%,all
-			stringtrimright,z,z%z0%,2
-			return z
-			break
-		}
-	}
-	return 0
+	b:=dnsquery(a)
+	if !ec(b)
+		return 0
+	return b
 }
 sv_chk(a,b=""){
 	global cnfig
@@ -896,16 +900,18 @@ fr(b=""){
 	global bcdir,gtdir
 	if !ec(b){
 		loop,%bcdir%\*.backup {
-			st("Restoring GTA SA files",a_loopfilename)
-			stringtrimright,a,a_loopfilename,7
-			filecopy,%bcdir%\%a_loopfilename%,%gtdir%\%a%,1
+			x:=a_loopfilename
+			st("Restoring GTA SA files",x)
+			stringtrimright,a,x,7
+			filecopy,%bcdir%\%x%,%gtdir%\%a%,1
 		}
 	}
 	else if ec(b){
 		loop,%bcdir%\%b%\*.backup {
-			st("Restoring GTA SA files",b "\" a_loopfilename)
-			stringtrimright,a,a_loopfilename,7
-			filecopy,%bcdir%\%b%\%a_loopfilename%,%gtdir%\%b%\%a%,1
+			x:=a_loopfilename
+			st("Restoring GTA SA files",b "\" x)
+			stringtrimright,a,x,7
+			filecopy,%bcdir%\%b%\%x%,%gtdir%\%b%\%a%,1
 		}
 	}
 	settimer,rtips,500
@@ -977,7 +983,8 @@ cc_cpy(a,z=""){
 		return 0
 	}
 	st("Changing SA-MP client to",a)
-	pr_kil("samp.exe")
+	if !pr_kil("samp.exe|gta_sa.exe")
+		return
 	if ec(z){
 		st("Copying SA-MP ASI files","samp.asi")
 		filecopy,%b%\samp.dll,%c%\samp.asi,1
@@ -987,14 +994,16 @@ cc_cpy(a,z=""){
 		filedelete,%c%\samp.asi
 	}
 	loop,%b%\* {
-		fb(a_loopfilename)
-		st("Copying SA-MP files",a_loopfilename)
-		filecopy,%b%\%A_LoopFileName%,%c%\%A_LoopFileName%,1
+		x:=a_loopfilename
+		fb(x)
+		st("Copying SA-MP files",x)
+		filecopy,%b%\%x%,%c%\%x%,1
 	}
 	loop,%b%\SAMP\* {
-		fb("SAMP\" a_loopfilename)
-		st("Copying SA-MP files","SAMP\" a_loopfilename)
-		filecopy,%b%\SAMP\%A_LoopFileName%,%c%\SAMP\%A_LoopFileName%,1
+		x:=a_loopfilename
+		fb("SAMP\" x)
+		st("Copying SA-MP files","SAMP\" x)
+		filecopy,%b%\SAMP\%x%,%c%\SAMP\%x%,1
 	}
 	st("Changing SA-MP client to " a,"Complete")
 	iniwrite,%a%,%e%,main,crcli
@@ -1048,7 +1057,16 @@ pr_kil(a){
 	stringsplit,a,a,`|
 	loop, %a0% {
 		b:=a%a_index%
-		if pr_chk(b)
-			run, %comspec% /c taskkill.exe /im %b% /f,,hide
+		if pr_chk(b){
+			msgbox,52,Warning 504 [Process],GTA / SAMP Process is currently running [%b%].`nWould you like to terminate the process to continue ?
+			ifmsgbox no
+				return 0
+			run, %comspec% /c taskkill.exe /im %b% /f,,hide,c
+			while pr_chk(c)
+				sleep 100
+		}
 	}
+	return 1
 }
+#Include json.ahk
+#Include dnsquery.ahk
