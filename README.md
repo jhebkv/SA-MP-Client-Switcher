@@ -2,6 +2,7 @@
 - Title: SA:MP Client Switcher (samp_cs)
 - Description: Easy switch / Auto change SAMP client to different version.
 - Version: 1.0.1.1
+- Author: jheb
 
 ---------------------------------------------
 Content:
