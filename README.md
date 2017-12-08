@@ -54,5 +54,6 @@ This program use ASI loader to read samp.dll
 
 ---------------------------------------------
 **Download**
-- https://forum.ls-rp.com/viewtopic.php?f=222&t=650894 (forum.ls-rp)
-- http://www.gtagarage.com/mods/show.php?id=29058 (gtagarage)
+- [[Googledrive](https://drive.google.com/open?id=1r18lRfiA3eAkU3JYyy8imWOf8JewwOqz)]
+- [[Forum.ls-rp](https://forum.ls-rp.com/viewtopic.php?f=222&t=650894)]
+- [[Gtagarage](http://www.gtagarage.com/mods/show.php?id=29058)]
