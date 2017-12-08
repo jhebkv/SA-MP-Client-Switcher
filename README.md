@@ -4,16 +4,16 @@ Version: 1.0.1.1
 
 ---------------------------------------------
 Content:
- SAMP 0.3.7-R2
- SAMP 0.3.8-RC4
- ASI Loader
+ SAMP 0.3.7-R2,
+ SAMP 0.3.8-RC4,
+ ASI Loader.
 
 Credits:
- SAMP Launcher (jheb)
- SA-MP (samp.com)
- ServerList API (monitor.sacnr.com)
- ASI loader (silent/zdanio95)
- AHK (autohotkey.com)
+ SAMP Launcher (jheb),
+ SA-MP (samp.com),
+ ServerList API (monitor.sacnr.com),
+ ASI loader (silent/zdanio95),
+ AHK (autohotkey.com).
  
 ---------------------------------------------
 What is this about ?
