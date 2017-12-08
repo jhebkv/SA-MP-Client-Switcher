@@ -12,7 +12,7 @@ if not (A_IsAdmin or RegExMatch(full_command_line," /restart(?!\S)")){
 	}
 	ExitApp
 }
-pvers:="1.0.1.1-b"
+pvers:="1.0.1.1-b_test"
 pname:="SAMP Launcher"
 psnme:="SAMPL"
 cnfig:="Settings.ini"
