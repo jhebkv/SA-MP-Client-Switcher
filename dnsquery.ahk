@@ -1,4 +1,7 @@
 ; ==================================================================================================================================
+; Credits:
+;     https://autohotkey.com/boards/viewtopic.php?t=489
+;     02 Nov 2013 - just me (https://autohotkey.com/boards/memberlist.php?mode=viewprofile&u=148)
 ; Function:
 ;     Query DNS to get the IPv4 address(es) for the given host/domain name or vice versa.
 ; Parameters:
