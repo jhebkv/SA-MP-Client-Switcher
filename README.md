@@ -36,6 +36,7 @@ This program use ASI loader to read samp.dll
 >    - b) To change client Only:
 >      - Go to Option > Check then uncheck restore on exit.
 >      - Client Settings > Select SAMP Version Click OK.
+>      - Or simply Click on dropdownlist on main window (v1.0.1.1) then select version.
 >      - Exit the program, then launch samp.exe
 
 ---------------------------------------------
@@ -44,7 +45,7 @@ This program use ASI loader to read samp.dll
  ------------|-------------|--------------|-------------
  `1.` SAMP 0.3.7-R2 | `*` SAMP Launcher (jheb) | `*` v1.0.1.1 [Googledrive](https://drive.google.com/open?id=1r18lRfiA3eAkU3JYyy8imWOf8JewwOqz) | `*` [Forum.ls-rp](https://forum.ls-rp.com/viewtopic.php?f=222&t=650894)
  `2.` SAMP 0.3.8-RC4 | `*` SA-MP (samp.com) | `*` v1.0.1.1 [Gtagarage](http://www.gtagarage.com/mods/show.php?id=29058) | `*` [Youtube](https://youtu.be/K6VhlzsR6EQ) (Preview)
- `3.` ASI Loader | `*` ServerList API (monitor.sacnr.com) |  | 
+ `3.` ASI Loader | `*` ServerList API (monitor.sacnr.com) | `*` Source Code v1.0.1.1 [Github](https://github.com/jhebkv/Samp_Cs/releases/tag/1.0.1.1) | `*` [Github Wiki](https://github.com/jhebkv/Samp_Cs/wiki)
  `-` | `*` ASI loader (silent/zdanio95) |  | 
  `-` | `*` AHK (autohotkey.com) |  | 
 
