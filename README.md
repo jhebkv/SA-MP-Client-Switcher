@@ -1,3 +1,5 @@
+
+
 # SAMP Client Switcher (Launcher)
 - Title: SA:MP Client Switcher (samp_cs)
 - Description: Easy switch / Auto change SAMP client to different version.
@@ -34,15 +36,17 @@ This program use ASI loader to read samp.dll
 >      - Client Settings > Select SAMP Version Click OK.
 >      - Exit the program, then launch samp.exe
 ---------------------------------------------
+
 > **Content** | **Credits**
-> ------------|-------------
+> ------------|------------------------------
 > `1.` SAMP 0.3.7-R2 | `*` SAMP Launcher (jheb)
 > `2.` SAMP 0.3.8-RC4 | `*` SA-MP (samp.com)
 > `3.` ASI Loader | `*` ServerList API (monitor.sacnr.com)
 > .  | `*` ASI loader (silent/zdanio95)
 > .  | `*` AHK (autohotkey.com)
 ---------------------------------------------
+
 > **Download** | *More Info:*
-> -------------|-------------
+> -------------|-----------------------------
 > [Googledrive](https://drive.google.com/open?id=1r18lRfiA3eAkU3JYyy8imWOf8JewwOqz) **-** [Gtagarage](http://www.gtagarage.com/mods/show.php?id=29058) | [Forum.ls-rp](https://forum.ls-rp.com/viewtopic.php?f=222&t=650894) **-** [Youtube](https://youtu.be/K6VhlzsR6EQ) (Preview)
 ---------------------------------------------
