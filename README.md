@@ -40,18 +40,13 @@ This program use ASI loader to read samp.dll
 
 ---------------------------------------------
 
-> **Content** | **Credits**
-> ------------|------------------------------
-> `1.` SAMP 0.3.7-R2 | `*` SAMP Launcher (jheb)
-> `2.` SAMP 0.3.8-RC4 | `*` SA-MP (samp.com)
-> `3.` ASI Loader | `*` ServerList API (monitor.sacnr.com)
-> .  | `*` ASI loader (silent/zdanio95)
-> .  | `*` AHK (autohotkey.com)
+ **Content** | **Credits** | **Download** | *More Info*
+ ------------|-------------|--------------|-------------
+ `1.` SAMP 0.3.7-R2 | `*` SAMP Launcher (jheb) | `*` v1.0.1.1 [Googledrive](https://drive.google.com/open?id=1r18lRfiA3eAkU3JYyy8imWOf8JewwOqz) | `*` [Forum.ls-rp](https://forum.ls-rp.com/viewtopic.php?f=222&t=650894)
+ `2.` SAMP 0.3.8-RC4 | `*` SA-MP (samp.com) | `*` v1.0.1.1 [Gtagarage](http://www.gtagarage.com/mods/show.php?id=29058) | `*` [Youtube](https://youtu.be/K6VhlzsR6EQ) (Preview)
+ `3.` ASI Loader | `*` ServerList API (monitor.sacnr.com) |  | 
+ `-` | `*` ASI loader (silent/zdanio95) |  | 
+ `-` | `*` AHK (autohotkey.com) |  | 
 
 ---------------------------------------------
 
-> **Download** | *More Info:*
-> -------------|-----------------------------
-> [Googledrive](https://drive.google.com/open?id=1r18lRfiA3eAkU3JYyy8imWOf8JewwOqz) **-** [Gtagarage](http://www.gtagarage.com/mods/show.php?id=29058) | [Forum.ls-rp](https://forum.ls-rp.com/viewtopic.php?f=222&t=650894) **-** [Youtube](https://youtu.be/K6VhlzsR6EQ) (Preview)
-
----------------------------------------------
