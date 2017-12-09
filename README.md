@@ -5,7 +5,9 @@
 - Description: Easy switch / Auto change SAMP client to different version.
 - Version: 1.0.1.1
 - Author: jheb
+
 ---------------------------------------------
+
 > ![sampcs_img](https://i.imgur.com/zvmW4pm.png)
 
 ### **What is this about ?**
@@ -35,6 +37,7 @@ This program use ASI loader to read samp.dll
 >      - Go to Option > Check then uncheck restore on exit.
 >      - Client Settings > Select SAMP Version Click OK.
 >      - Exit the program, then launch samp.exe
+
 ---------------------------------------------
 
 > **Content** | **Credits**
@@ -44,9 +47,11 @@ This program use ASI loader to read samp.dll
 > `3.` ASI Loader | `*` ServerList API (monitor.sacnr.com)
 > .  | `*` ASI loader (silent/zdanio95)
 > .  | `*` AHK (autohotkey.com)
+
 ---------------------------------------------
 
 > **Download** | *More Info:*
 > -------------|-----------------------------
 > [Googledrive](https://drive.google.com/open?id=1r18lRfiA3eAkU3JYyy8imWOf8JewwOqz) **-** [Gtagarage](http://www.gtagarage.com/mods/show.php?id=29058) | [Forum.ls-rp](https://forum.ls-rp.com/viewtopic.php?f=222&t=650894) **-** [Youtube](https://youtu.be/K6VhlzsR6EQ) (Preview)
+
 ---------------------------------------------
