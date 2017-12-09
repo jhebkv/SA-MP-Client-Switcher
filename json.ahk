@@ -14,8 +14,9 @@
  *     GitHub:     - https://github.com/cocobelgica/AutoHotkey-JSON
  *     Forum Topic - http://goo.gl/r0zI8t
  *     Email:      - cocobelgica <at> gmail <dot> com
+ * Credits:
+ *	cocobelgica (https://github.com/cocobelgica/AutoHotkey-JSON)
  */
-
 
 /**
  * Class: JSON
